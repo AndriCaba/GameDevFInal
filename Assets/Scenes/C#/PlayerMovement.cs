@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float jump;
     public bool isFacingRight;
     public Animator anim;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +25,13 @@ public class PlayerMovement : MonoBehaviour
         Move = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(Move * speed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
+        // Jump logic
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, speed);//rb.AddForce(new Vector2(rb.velocity.x, jump));
+            rb.velocity = new Vector2(rb.velocity.x, jump);
         }
 
+        // Running animation
         if (Move >= 0.1f || Move <= -0.1f)
         {
             anim.SetBool("isRunning", true);
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isRunning", false);
         }
 
+        // Flip character
         if (!isFacingRight && Move > 0)
         {
             Flip();
@@ -60,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            anim.SetBool("isJumping", true);
+            isGrounded = false;
         }
     }
 
@@ -68,11 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            anim.SetBool("isJumping", false);
+            isGrounded = true;
         }
     }
-
-  
 }
-
-
