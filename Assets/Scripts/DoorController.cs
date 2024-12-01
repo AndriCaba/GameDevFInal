@@ -6,7 +6,15 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     private bool hasKey = false;
+    public GameObject KeyIcon;
 
+
+    void Start(){
+        KeyIcon = GameObject.Find("KeyHolder");
+        if (KeyIcon != null){Debug.Log("NoKey");}
+        KeyIcon.SetActive(false);
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && hasKey)
@@ -20,5 +28,6 @@ public class DoorController : MonoBehaviour
     {
         hasKey = true;
         Debug.Log("Key picked up!");
+        KeyIcon.SetActive(true);
     }
 }
