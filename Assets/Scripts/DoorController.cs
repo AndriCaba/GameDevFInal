@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
     void Start(){
         KeyIcon = GameObject.Find("KeyHolder");
         if (KeyIcon != null){Debug.Log("NoKey");}
-        KeyIcon.SetActive(false);
+        KeyIcon.SetActive(true);
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

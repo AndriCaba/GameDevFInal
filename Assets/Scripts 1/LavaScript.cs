@@ -16,6 +16,7 @@ public class LavaScript : MonoBehaviour
         {
             isPlayerInLava = true;
         }
+       
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -40,6 +41,8 @@ public class LavaScript : MonoBehaviour
     {
         // Find the player object and deal damage
         GameObject player = GameObject.FindWithTag("Player");
+       // GameObject structure = GameObject.FindWithTag("Ground");
+        
         if (player != null)
         {
             HealthScriptPlayer playerHealth = player.GetComponent<HealthScriptPlayer>();
@@ -49,5 +52,6 @@ public class LavaScript : MonoBehaviour
                 Debug.Log($"Player is in lava and took {damagePerSecond } damage.");
             }
         }
+       
     }
 }
